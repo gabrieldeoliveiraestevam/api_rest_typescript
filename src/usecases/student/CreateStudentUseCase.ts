@@ -1,5 +1,5 @@
 import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
-import { ICreateSubjectResponse } from "../subject/domain/ICreateSubjectResponse";
+import { ICreateSubjectResponse } from "@usecases/subject/domain/ICreateSubjectResponse";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
 
 export class CreateStudentUseCase {
