@@ -13,6 +13,9 @@
     "emitDecoratorMetadata": true,         
     "skipLibCheck": true,                     
     "forceConsistentCasingInFileNames": true,
+    "strict": true,                                   /* Enable all strict type-checking options. */
+    "strictPropertyInitialization": false,            /* Check for class properties that are declared but not set in the constructor. */
+    "noImplicitThis": true,                           /* Enable error reporting when 'this' is given the type 'any'. */
     "baseUrl": ".",
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
