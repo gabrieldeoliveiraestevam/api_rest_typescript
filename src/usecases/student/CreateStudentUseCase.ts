@@ -1,6 +1,6 @@
 import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
-import { ICreateSubjectResponse } from "@usecases/subject/domain/ICreateSubjectResponse";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
+import { ICreateStudentResponse } from "./domain/ICreateStudentResponse";
 
 export class CreateStudentUseCase {
     constructor(
@@ -8,7 +8,7 @@ export class CreateStudentUseCase {
     ){
 
     }
-    async execute(data: ICreateStudentRequest): Promise<ICreateSubjectResponse> { 
+    async execute(data: ICreateStudentRequest): Promise<ICreateStudentResponse> { 
 
         try {
             
