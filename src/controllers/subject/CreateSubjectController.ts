@@ -1,5 +1,5 @@
+import { CreateSubjectUseCase } from "@usecases/subject/CreateSubjectUseCase";
 import { Request, Response } from "express";
-import { CreateSubjectUseCase } from "../../usecases/subject/CreateSubjectUseCase";
 
 export class CreateSubjectController {
     constructor(

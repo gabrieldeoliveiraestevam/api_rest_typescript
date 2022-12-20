@@ -1,5 +1,5 @@
+import { CreateVideoUseCase } from "@usecases/video/CreateVideoUseCase";
 import { Request, Response } from "express";
-import { CreateVideoUseCase } from "../../usecases/video/CreateVideoUseCase";
 
 export class CreateVideoController {
     constructor(

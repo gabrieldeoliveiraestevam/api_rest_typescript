@@ -1,8 +1,8 @@
+import { Room } from '@entities/Room';
+import { Video } from '@entities/Video';
+import { IVideoRepository } from '@usecases/port/repositories/IVideoRepository';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
-import { Room } from '../entities/Room';
-import { Video } from '../entities/Video';
-import { IVideoRepository } from '../usecases/port/repositories/IVideoRepository';
 
 class VideoRepositoryTypeOrm implements IVideoRepository {
   private repository: Repository<Video>;

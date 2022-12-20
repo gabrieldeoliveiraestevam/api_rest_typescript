@@ -1,4 +1,4 @@
-import { Student } from "../../../entities/Student";
+import { Student } from "@entities/Student";
 
 export interface IAddStudentInRoomResponse {
     id: number,

@@ -1,5 +1,5 @@
+import { ListRoomUseCase } from "@usecases/room/LIstRoomUseCase";
 import { Request, Response } from "express";
-import { ListRoomUseCase } from "../../usecases/room/LIstRoomUseCase";
 
 export class ListRoomController {
     constructor(

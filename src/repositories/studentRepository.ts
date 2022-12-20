@@ -1,7 +1,7 @@
+import { Student } from '@entities/Student';
+import { IStudentRepository } from '@usecases/port/repositories/IStudentRepository';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
-import { Student } from '../entities/Student';
-import { IStudentRepository } from '../usecases/port/repositories/IStudentRepository';
 
 class StudentRepositoryTypeOrm implements IStudentRepository {
   private repository: Repository<Student>;

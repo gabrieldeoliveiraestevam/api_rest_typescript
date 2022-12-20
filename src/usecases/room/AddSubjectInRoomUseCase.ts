@@ -1,5 +1,5 @@
-import { RoomRepositoryTypeOrm } from "../../repositories/roomRepository";
-import { SubjectRepositoryTypeOrm } from "../../repositories/subjectRepository";
+import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
+import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
 import { IAddSubjectInRoomRequest } from "./domain/IAddSubjectInRoomRequest";
 import { IAddSubjectInRoomResponse } from "./domain/IAddSubjectInRoomResponse";
 

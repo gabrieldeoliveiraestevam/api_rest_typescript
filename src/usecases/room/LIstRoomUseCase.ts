@@ -1,6 +1,6 @@
+import { Room } from "@entities/Room";
+import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
 
-import { Room } from "../../entities/Room";
-import { RoomRepositoryTypeOrm } from "../../repositories/roomRepository";
 
 export class ListRoomUseCase {
     constructor(

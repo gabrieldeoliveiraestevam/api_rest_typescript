@@ -1,4 +1,4 @@
-import { StudentRepositoryTypeOrm } from "../../repositories/studentRepository";
+import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
 import { ICreateSubjectResponse } from "../subject/domain/ICreateSubjectResponse";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
 

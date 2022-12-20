@@ -1,4 +1,4 @@
-import { Subject } from "../../../entities/Subject";
+import { Subject } from "@entities/Subject";
 
 export interface ISubjectRepository {
   save(subject: Subject): Promise<Subject>;

@@ -1,21 +1,21 @@
-import { AddSubjectInRoomUseCase } from "../usecases/room/AddSubjectInRoomUseCase";
-import { CreateRoomUseCase } from "../usecases/room/CreateRoomUseCase";
-import { ListRoomUseCase } from "../usecases/room/LIstRoomUseCase";
-import { CreateSubjectUseCase } from "../usecases/subject/CreateSubjectUseCase";
-import { CreateVideoUseCase } from "../usecases/video/CreateVideoUseCase";
+import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
+import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
+import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
+import { VideoRepositoryTypeOrm } from "@repositories/videoRepository";
+import { AddStudentInRoomUseCase } from "@usecases/room/AddStudentInRoomUseCase";
+import { AddSubjectInRoomUseCase } from "@usecases/room/AddSubjectInRoomUseCase";
+import { CreateRoomUseCase } from "@usecases/room/CreateRoomUseCase";
+import { ListRoomUseCase } from "@usecases/room/LIstRoomUseCase";
+import { CreateStudentUseCase } from "@usecases/student/CreateStudentUseCase";
+import { CreateSubjectUseCase } from "@usecases/subject/CreateSubjectUseCase";
+import { CreateVideoUseCase } from "@usecases/video/CreateVideoUseCase";
+import { AddStudentInRoomController } from "./room/AddStudentInRoomController";
 import { AddSubjectInRoomController } from "./room/AddSubjectInRoomController";
 import { CreateRoomController } from "./room/CreateRoomController";
+import { ListRoomController } from "./room/ListRoomController";
+import { CreateStudentController } from "./student/CreateStudentController";
 import { CreateSubjectController } from "./subject/CreateSubjectController";
 import { CreateVideoController } from "./video/CreateVideoController";
-import { ListRoomController } from "./room/ListRoomController";
-import { SubjectRepositoryTypeOrm } from "../repositories/subjectRepository";
-import { RoomRepositoryTypeOrm } from "../repositories/roomRepository";
-import { VideoRepositoryTypeOrm } from "../repositories/videoRepository";
-import { CreateStudentUseCase } from "../usecases/student/CreateStudentUseCase";
-import { StudentRepositoryTypeOrm } from "../repositories/studentRepository";
-import { CreateStudentController } from "./student/CreateStudentController";
-import { AddStudentInRoomUseCase } from "../usecases/room/AddStudentInRoomUseCase";
-import { AddStudentInRoomController } from "./room/AddStudentInRoomController";
 
 // Repositories
 const subjectRepository = new SubjectRepositoryTypeOrm();

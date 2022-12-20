@@ -1,5 +1,5 @@
-import { RoomRepositoryTypeOrm } from "../../repositories/roomRepository";
-import { VideoRepositoryTypeOrm } from "../../repositories/videoRepository";
+import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
+import { VideoRepositoryTypeOrm } from "@repositories/videoRepository";
 import { ICreateVideoRequest } from "./domain/ICreateVideoRequest";
 import { ICreateVideoResponse } from "./domain/ICreateVideoResponse";
 

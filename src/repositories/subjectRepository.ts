@@ -1,7 +1,7 @@
+import { Subject } from '@entities/Subject';
+import { ISubjectRepository } from '@usecases/port/repositories/ISubjectRepository';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
-import { Subject } from '../entities/Subject';
-import { ISubjectRepository } from "../usecases/port/repositories/ISubjectRepository";
 
 class SubjectRepositoryTypeOrm implements ISubjectRepository {
   private repository: Repository<Subject>;

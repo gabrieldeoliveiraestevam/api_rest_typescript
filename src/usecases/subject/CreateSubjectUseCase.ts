@@ -1,4 +1,4 @@
-import { SubjectRepositoryTypeOrm } from "../../repositories/subjectRepository";
+import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
 import { ICreateSubjectRequest } from "./domain/ICreateSubjectRequest";
 import { ICreateSubjectResponse } from "./domain/ICreateSubjectResponse";
 

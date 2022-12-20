@@ -1,5 +1,5 @@
+import { CreateStudentUseCase } from "@usecases/student/CreateStudentUseCase";
 import { Request, Response } from "express";
-import { CreateStudentUseCase } from "../../usecases/student/CreateStudentUseCase";
 
 export class CreateStudentController {
     constructor(

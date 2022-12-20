@@ -1,8 +1,8 @@
+import { Room } from '@entities/Room';
+import { Student } from '@entities/Student';
+import { IRoomRepository } from '@usecases/port/repositories/IRoomRepository';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
-import { Room } from '../entities/Room';
-import { Student } from '../entities/Student';
-import { IRoomRepository } from '../usecases/port/repositories/IRoomRepository';
 
 class RoomRepositoryTypeOrm implements IRoomRepository{
   private repository: Repository<Room>;

@@ -1,5 +1,5 @@
-import { RoomRepositoryTypeOrm } from "../../repositories/roomRepository";
-import { ICreateSubjectResponse } from "../subject/domain/ICreateSubjectResponse";
+import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
+import { ICreateSubjectResponse } from "@usecases/subject/domain/ICreateSubjectResponse";
 import { ICreateRoomRequest } from "./domain/ICreateRoomRequest";
 
 export class CreateRoomUseCase {
