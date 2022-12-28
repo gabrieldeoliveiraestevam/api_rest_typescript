@@ -4,8 +4,8 @@
     "module": "commonjs",                     
     "lib": ["es6"],                             
     "allowJs": true,                                              
-    "rootDir": "./src",     
-    "outDir": "./dist",                  
+    "rootDir": "./src",   
+    "outDir": "./dist",                    
     "removeComments": true,                                 
     "esModuleInterop": true,                  
     "resolveJsonModule": true,
@@ -13,9 +13,9 @@
     "emitDecoratorMetadata": true,         
     "skipLibCheck": true,                     
     "forceConsistentCasingInFileNames": true,
-    "strict": true,                        
-    "strictPropertyInitialization": false, 
-    "noImplicitThis": true,
+    "strict": true,                                 
+    "strictPropertyInitialization": false,           
+    "noImplicitThis": true,                         
     "baseUrl": ".",
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
@@ -24,7 +24,7 @@
       "@usecases/*": ["./src/usecases/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ]
+  "compileOnSave": false,
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*spec.ts", "**/*test.ts", "dist", "build", "example"]
 }
