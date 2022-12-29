@@ -1,3 +1,4 @@
+import { Config } from "./config";
 import express from "express";
 import { AppDataSource } from "./data-source";
 import routes from "./routes";
@@ -13,5 +14,5 @@ AppDataSource.initialize().then(() => {
 
     app.use(routes);
 
-    return app.listen(process.env.PORT, () => console.log('Servidor ligado!'));
+    return app.listen(Config.SERVER_PORT, () => console.log('Servidor ligado!'));
 });
