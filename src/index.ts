@@ -14,5 +14,5 @@ AppDataSource.initialize().then(() => {
 
     app.use(routes);
 
-    return app.listen(Config.SERVER_PORT, () => console.log('Servidor ligado!'));
+    return app.listen(Config.SERVER_PORT, () => console.log(`Servidor ligado na porta ${Config.SERVER_PORT}`));
 });
