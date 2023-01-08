@@ -14,4 +14,10 @@ export const Config = {
     PASSWORD: process.env.DB_PASS ?? 'example',
     PORT: Number(process.env.DB_PORT ?? 5432),
   },
+  EMAIL_OUTLOOK: {
+    HOST: process.env.EMAIL_OUTLOOK_HOST,
+    PORT: process.env.EMAIL_OUTLOOK_PORT,
+    USER: process.env.EMAIL_OUTLOOK_USER,
+    PASS: process.env.EMAIL_OUTLOOK_PASS,
+  }
 };

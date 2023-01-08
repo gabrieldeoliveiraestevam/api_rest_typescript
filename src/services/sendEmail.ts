@@ -1,3 +1,4 @@
+import { Config } from '@config/index';
 import nodemailer from 'nodemailer';
 
 class SendEmail {
@@ -7,19 +8,19 @@ class SendEmail {
 
     ){
         this.transport = nodemailer.createTransport({
-            host: "smtp.office365.com",
-            port: 587,
+            host: Config.EMAIL_OUTLOOK.HOST,
+            port: Number(Config.EMAIL_OUTLOOK.PORT),
             secure: false,
             auth: {
-              user: "gabrieldeoliveiraestevam1@outlook.com",
-              pass: "glok123654"
+              user: Config.EMAIL_OUTLOOK.USER,
+              pass: Config.EMAIL_OUTLOOK.PASS
             }
         });
     }
 
     async execute(to: string, name: string){
         this.transport.sendMail({
-            from: 'gabrieldeoliveiraestevam1@outlook.com',
+            from: Config.EMAIL_OUTLOOK.USER,
             to: to,
             subject: 'Estudante cadastrado com sucesso',
             html: `<p>O estudande ${name} foi cadastrado no sistema da escola</p>`,
