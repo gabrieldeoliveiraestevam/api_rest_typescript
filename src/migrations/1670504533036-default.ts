@@ -22,6 +22,21 @@ export class default1670504533036 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "room_student" DROP CONSTRAINT "FK_aeb9685847eeb3fd9cc60ce32c3"`);
+        await queryRunner.query(`ALTER TABLE "room_student" DROP CONSTRAINT "FK_259163074fc4ac5e5cd8de34a62"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_aeb9685847eeb3fd9cc60ce32c"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_259163074fc4ac5e5cd8de34a6"`);
+        await queryRunner.query(`DROP TABLE "room_student"`);
+        await queryRunner.query(`DROP TABLE "students"`);
+        await queryRunner.query(`ALTER TABLE "room_subject" DROP CONSTRAINT "FK_a05f10c497f5f7db3022664a6d6"`);
+        await queryRunner.query(`ALTER TABLE "room_subject" DROP CONSTRAINT "FK_f227421d2ef64ab086261ac07fd"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_a05f10c497f5f7db3022664a6d"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_f227421d2ef64ab086261ac07f"`);
+        await queryRunner.query(`DROP TABLE "room_subject"`);
+        await queryRunner.query(`DROP TABLE "subjects"`);
+        await queryRunner.query(`ALTER TABLE "videos" DROP CONSTRAINT "FK_64bb2d8544299bbde670698ac37"`);
+        await queryRunner.query(`DROP TABLE "videos"`);
+        await queryRunner.query(`DROP TABLE "rooms"`);
     }
 
 }
