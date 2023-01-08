@@ -16,7 +16,8 @@ export class CreateStudentUseCase {
 
             const student = this.studentRepository.create(
                 data.name,
-                birth_date_object
+                birth_date_object,
+                data.email,
             );
 
             await this.studentRepository.save(student);

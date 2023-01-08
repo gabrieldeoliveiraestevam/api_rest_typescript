@@ -10,10 +10,11 @@ class StudentRepositoryTypeOrm implements IStudentRepository {
     this.repository = AppDataSource.getRepository(Student);
   }
 
-  create(name: string, birth_date: Date): Student {
+  create(name: string, birth_date: Date, email: string): Student {
     return this.repository.create({ 
         name: name,
-        birth_date: birth_date 
+        birth_date: birth_date,
+        email: email
     })
   }
 

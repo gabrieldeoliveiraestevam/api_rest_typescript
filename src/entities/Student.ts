@@ -12,6 +12,9 @@ export class Student {
     @Column({type: 'date'})
     birth_date: Date;
 
+    @Column({type: 'text'})
+    email: string;
+
     @ManyToMany(() => Room, room => room.students)
     @JoinTable({
         name: 'room_student',
