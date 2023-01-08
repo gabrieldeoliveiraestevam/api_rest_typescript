@@ -24,7 +24,7 @@ export class CreateStudentUseCase {
 
             await this.studentRepository.save(student);
 
-            await this.sendEmail.execute(student.email);
+            await this.sendEmail.execute(student.email, student.name);
     
             return student;
         } catch (error) {

@@ -17,16 +17,16 @@ class SendEmail {
         });
     }
 
-    async execute(to: string){
+    async execute(to: string, name: string){
         this.transport.sendMail({
             from: 'gabrieldeoliveiraestevam1@outlook.com',
             to: to,
-            subject: 'Email enviado com sucesso',
-            html: '<p>!Olá cabeção</p>',
-            text: 'Olá cabeção!'
+            subject: 'Estudante cadastrado com sucesso',
+            html: `<p>O estudande ${name} foi cadastrado no sistema da escola</p>`,
+            text: `O estudande ${name} foi cadastrado no sistema da escola`
         })
         .then(() => console.log('Email enviado com sucesso!'))
-        .catch((err) => console.log('Error ao enviar email - error: ' + err));
+        .catch((err) => console.log('Erro ao enviar email - Erro: ' + err));
     };
 
 };
