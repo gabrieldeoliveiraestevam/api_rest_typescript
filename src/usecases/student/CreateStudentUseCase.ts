@@ -1,10 +1,12 @@
 import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
+import { sendEmail } from "@services/sendEmail";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
 import { ICreateStudentResponse } from "./domain/ICreateStudentResponse";
 
 export class CreateStudentUseCase {
     constructor(
-        private studentRepository: StudentRepositoryTypeOrm
+        private studentRepository: StudentRepositoryTypeOrm,
+        private sendEmail: sendEmail,
     ){
 
     }
@@ -21,6 +23,8 @@ export class CreateStudentUseCase {
             );
 
             await this.studentRepository.save(student);
+
+            await this.sendEmail.execute(student.email);
     
             return student;
         } catch (error) {

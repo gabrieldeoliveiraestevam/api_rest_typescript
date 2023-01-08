@@ -24,7 +24,9 @@ class sendEmail {
             subject: 'Email enviado com sucesso',
             html: '<p>!Olá cabeção</p>',
             text: 'Olá cabeção!'
-        });
+        })
+        .then(() => console.log('Email enviado com sucesso!'))
+        .catch((err) => console.log('Error ao enviar email - error: ' + err));
     };
 
 };
