@@ -1,12 +1,12 @@
 import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
-import { sendEmail } from "@services/sendEmail";
+import { SendEmail } from "@services/sendEmail";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
 import { ICreateStudentResponse } from "./domain/ICreateStudentResponse";
 
 export class CreateStudentUseCase {
     constructor(
         private studentRepository: StudentRepositoryTypeOrm,
-        private sendEmail: sendEmail,
+        private sendEmail: SendEmail,
     ){
 
     }

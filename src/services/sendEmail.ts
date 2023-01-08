@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-class sendEmail {
+class SendEmail {
     private transport;
 
     constructor(
@@ -31,4 +31,4 @@ class sendEmail {
 
 };
 
-export { sendEmail }; 
+export { SendEmail }; 
