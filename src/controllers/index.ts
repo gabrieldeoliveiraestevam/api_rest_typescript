@@ -57,7 +57,7 @@ const listRoomController = new ListRoomController(listRoomUseCase);
 
 export { listRoomUseCase , listRoomController }
 
-console.log('teste');
+console.log('teste12343424');
 
 const createStudentUseCase = new CreateStudentUseCase(studentRepository,sendEmail);
 const createStudentController = new CreateStudentController(createStudentUseCase);
