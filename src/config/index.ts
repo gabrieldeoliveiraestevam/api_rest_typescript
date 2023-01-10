@@ -1,6 +1,8 @@
 import env from 'dotenv';
 import path from 'path';
 
+console.log('teste12321213312');
+
 env.config({
   path: path.join(__dirname, `../../env/.env`),
 });
