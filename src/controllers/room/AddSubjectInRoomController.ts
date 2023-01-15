@@ -1,8 +1,11 @@
 import { AddSubjectInRoomUseCase } from "@usecases/room/AddSubjectInRoomUseCase";
 import { Request, Response } from "express";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class AddSubjectInRoomController {
     constructor(
+        @inject("AddSubjectInRoomUseCase")
         private addSubjectInRoomUseCase: AddSubjectInRoomUseCase
     ){
         

@@ -1,8 +1,11 @@
 import { CreateVideoUseCase } from "@usecases/video/CreateVideoUseCase";
 import { Request, Response } from "express";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class CreateVideoController {
     constructor(
+        @inject("CreateVideoUseCase")
         private createVideoUseCase: CreateVideoUseCase
     ){
         

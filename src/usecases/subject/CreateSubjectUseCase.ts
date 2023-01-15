@@ -1,10 +1,13 @@
-import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
+import { ISubjectRepository } from "@usecases/port/repositories/ISubjectRepository";
+import { inject, injectable } from "tsyringe";
 import { ICreateSubjectRequest } from "./domain/ICreateSubjectRequest";
 import { ICreateSubjectResponse } from "./domain/ICreateSubjectResponse";
 
+@injectable()
 export class CreateSubjectUseCase {
     constructor(
-        private subjectRepository: SubjectRepositoryTypeOrm
+        @inject("SubjectRepositoryTypeOrm")
+        private subjectRepository: ISubjectRepository
     ){
 
     }

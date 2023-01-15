@@ -1,6 +1,8 @@
 import { Config } from '@config/index';
 import nodemailer from 'nodemailer';
+import { injectable } from 'tsyringe';
 
+@injectable()
 class SendEmail {
     private transport;
 

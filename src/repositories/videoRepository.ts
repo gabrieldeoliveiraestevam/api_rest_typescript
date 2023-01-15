@@ -1,9 +1,11 @@
 import { Room } from '@entities/Room';
 import { Video } from '@entities/Video';
 import { IVideoRepository } from '@usecases/port/repositories/IVideoRepository';
+import { injectable } from 'tsyringe';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
 
+@injectable()
 class VideoRepositoryTypeOrm implements IVideoRepository {
   private repository: Repository<Video>;
 

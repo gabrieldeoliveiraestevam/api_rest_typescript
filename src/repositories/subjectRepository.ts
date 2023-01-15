@@ -1,8 +1,10 @@
 import { Subject } from '@entities/Subject';
 import { ISubjectRepository } from '@usecases/port/repositories/ISubjectRepository';
+import { injectable } from 'tsyringe';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
 
+@injectable()
 class SubjectRepositoryTypeOrm implements ISubjectRepository {
   private repository: Repository<Subject>;
 

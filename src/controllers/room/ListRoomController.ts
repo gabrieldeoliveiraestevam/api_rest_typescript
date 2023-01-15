@@ -1,8 +1,11 @@
 import { ListRoomUseCase } from "@usecases/room/LIstRoomUseCase";
 import { Request, Response } from "express";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class ListRoomController {
     constructor(
+        @inject("ListRoomUseCase")
         private listRoomUseCase: ListRoomUseCase
     ){
         

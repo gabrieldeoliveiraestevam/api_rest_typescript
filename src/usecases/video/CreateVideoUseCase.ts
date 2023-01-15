@@ -1,12 +1,16 @@
-import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
-import { VideoRepositoryTypeOrm } from "@repositories/videoRepository";
+import { IRoomRepository } from "@usecases/port/repositories/IRoomRepository";
+import { IVideoRepository } from "@usecases/port/repositories/IVideoRepository";
+import { inject, injectable } from "tsyringe";
 import { ICreateVideoRequest } from "./domain/ICreateVideoRequest";
 import { ICreateVideoResponse } from "./domain/ICreateVideoResponse";
 
+@injectable()
 export class CreateVideoUseCase {
     constructor(
-        private roomRepository: RoomRepositoryTypeOrm,
-        private videoRepository: VideoRepositoryTypeOrm
+        @inject("RoomRepositoryTypeOrm")
+        private roomRepository: IRoomRepository,
+        @inject("VideoRepositoryTypeOrm")
+        private videoRepository: IVideoRepository
     ){
 
     }

@@ -1,8 +1,11 @@
 import { CreateSubjectUseCase } from "@usecases/subject/CreateSubjectUseCase";
 import { Request, Response } from "express";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class CreateSubjectController {
     constructor(
+        @inject("CreateSubjectUseCase")
         private createSubjectUseCase: CreateSubjectUseCase
     ){
         

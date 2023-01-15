@@ -1,12 +1,16 @@
-import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
-import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
+import { IRoomRepository } from "@usecases/port/repositories/IRoomRepository";
+import { ISubjectRepository } from "@usecases/port/repositories/ISubjectRepository";
+import { inject, injectable } from "tsyringe";
 import { IAddSubjectInRoomRequest } from "./domain/IAddSubjectInRoomRequest";
 import { IAddSubjectInRoomResponse } from "./domain/IAddSubjectInRoomResponse";
 
+@injectable()
 export class AddSubjectInRoomUseCase {
     constructor(
-        private subjectRepository: SubjectRepositoryTypeOrm,
-        private roomRepository: RoomRepositoryTypeOrm
+        @inject("SubjectRepositoryTypeOrm")
+        private subjectRepository: ISubjectRepository,
+        @inject("RoomRepositoryTypeOrm")
+        private roomRepository: IRoomRepository
     ){
 
     }

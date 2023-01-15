@@ -1,15 +1,3 @@
-import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
-import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
-import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
-import { VideoRepositoryTypeOrm } from "@repositories/videoRepository";
-import { SendEmail } from "@services/sendEmail";
-import { AddStudentInRoomUseCase } from "@usecases/room/AddStudentInRoomUseCase";
-import { AddSubjectInRoomUseCase } from "@usecases/room/AddSubjectInRoomUseCase";
-import { CreateRoomUseCase } from "@usecases/room/CreateRoomUseCase";
-import { ListRoomUseCase } from "@usecases/room/LIstRoomUseCase";
-import { CreateStudentUseCase } from "@usecases/student/CreateStudentUseCase";
-import { CreateSubjectUseCase } from "@usecases/subject/CreateSubjectUseCase";
-import { CreateVideoUseCase } from "@usecases/video/CreateVideoUseCase";
 import { container } from "tsyringe";
 import { AddStudentInRoomController } from "./room/AddStudentInRoomController";
 import { AddSubjectInRoomController } from "./room/AddSubjectInRoomController";
@@ -20,52 +8,27 @@ import { CreateSubjectController } from "./subject/CreateSubjectController";
 import { CreateVideoController } from "./video/CreateVideoController";
 import './../shared/container';
 
-// Repositories
-const subjectRepository = new SubjectRepositoryTypeOrm();
-const roomRepository = new RoomRepositoryTypeOrm();
-const videoRepository = new VideoRepositoryTypeOrm();
-const studentRepository = new StudentRepositoryTypeOrm();
+// Controllers
+const createSubjectController = container.resolve(CreateSubjectController);
 
-// Services
-const sendEmail = new SendEmail();
-
-// Controllers and Use Cases
-const createSubjectUseCase = new CreateSubjectUseCase(subjectRepository);
-const createSubjectController = new CreateSubjectController(createSubjectUseCase);
-
-export { createSubjectUseCase , createSubjectController }
-
-console.log("Passou por aqui!")
 const createRoomController = container.resolve(CreateRoomController);
 
-export { createRoomController }
+const createVideoController = container.resolve(CreateVideoController);
 
+const addSubjectInRoomController = container.resolve(AddSubjectInRoomController);
 
-console.log("Passou por aqui 2!")
+const listRoomController = container.resolve(ListRoomController);
 
-const createVideoUseCase = new CreateVideoUseCase(roomRepository,videoRepository);
-const createVideoController = new CreateVideoController(createVideoUseCase);
+const createStudentController = container.resolve(CreateStudentController);
 
-export { createVideoUseCase , createVideoController }
+const addStudentInRoomController = container.resolve(AddStudentInRoomController);
 
-
-const addSubjectInRoomUseCase = new AddSubjectInRoomUseCase(subjectRepository,roomRepository);
-const addSubjectInRoomController = new AddSubjectInRoomController(addSubjectInRoomUseCase);
-
-export { addSubjectInRoomUseCase , addSubjectInRoomController }
-
-
-const listRoomUseCase = new ListRoomUseCase(roomRepository);
-const listRoomController = new ListRoomController(listRoomUseCase);
-
-export { listRoomUseCase , listRoomController }
-
-const createStudentUseCase = new CreateStudentUseCase(studentRepository,sendEmail);
-const createStudentController = new CreateStudentController(createStudentUseCase);
-
-export { createStudentUseCase , createStudentController }
-
-const addStudentInRoomUseCase = new AddStudentInRoomUseCase(studentRepository,roomRepository);
-const addStudentInRoomController = new AddStudentInRoomController(addStudentInRoomUseCase);
-
-export { addStudentInRoomUseCase , addStudentInRoomController }
+export { 
+    createSubjectController , 
+    createRoomController , 
+    createVideoController , 
+    addSubjectInRoomController , 
+    listRoomController , 
+    createStudentController , 
+    addStudentInRoomController 
+}

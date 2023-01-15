@@ -1,10 +1,12 @@
 import { Room } from "@entities/Room";
-import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
+import { IRoomRepository } from "@usecases/port/repositories/IRoomRepository";
+import { inject, injectable } from "tsyringe";
 
-
+@injectable()
 export class ListRoomUseCase {
     constructor(
-        private roomRepository: RoomRepositoryTypeOrm
+        @inject("RoomRepositoryTypeOrm")
+        private roomRepository: IRoomRepository
     ){
 
     }

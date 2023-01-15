@@ -1,11 +1,15 @@
-import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
 import { SendEmail } from "@services/sendEmail";
+import { IStudentRepository } from "@usecases/port/repositories/IStudentRepository";
+import { inject, injectable } from "tsyringe";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
 import { ICreateStudentResponse } from "./domain/ICreateStudentResponse";
 
+@injectable()
 export class CreateStudentUseCase {
     constructor(
-        private studentRepository: StudentRepositoryTypeOrm,
+        @inject("StudentRepositoryTypeOrm")
+        private studentRepository: IStudentRepository,
+        @inject("SendEmail")
         private sendEmail: SendEmail,
     ){
 

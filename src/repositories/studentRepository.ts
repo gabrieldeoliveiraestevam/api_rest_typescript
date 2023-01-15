@@ -1,8 +1,10 @@
 import { Student } from '@entities/Student';
 import { IStudentRepository } from '@usecases/port/repositories/IStudentRepository';
+import { injectable } from 'tsyringe';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
 
+@injectable()
 class StudentRepositoryTypeOrm implements IStudentRepository {
   private repository: Repository<Student>;
 

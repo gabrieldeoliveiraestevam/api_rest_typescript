@@ -1,8 +1,11 @@
 import { CreateStudentUseCase } from "@usecases/student/CreateStudentUseCase";
 import { Request, Response } from "express";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class CreateStudentController {
     constructor(
+        @inject("CreateStudentUseCase")
         private createStudentUseCase: CreateStudentUseCase
     ){
         
