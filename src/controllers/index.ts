@@ -35,12 +35,13 @@ const createSubjectController = new CreateSubjectController(createSubjectUseCase
 
 export { createSubjectUseCase , createSubjectController }
 
+console.log("Passou por aqui!")
+const createRoomController = container.resolve(CreateRoomController);
 
-const createRoomUseCase = container.resolve(CreateRoomUseCase);
-const createRoomController = new CreateRoomController(createRoomUseCase);
+export { createRoomController }
 
-export { createRoomUseCase , createRoomController }
 
+console.log("Passou por aqui 2!")
 
 const createVideoUseCase = new CreateVideoUseCase(roomRepository,videoRepository);
 const createVideoController = new CreateVideoController(createVideoUseCase);
