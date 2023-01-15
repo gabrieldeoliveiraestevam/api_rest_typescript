@@ -1,7 +1,6 @@
 import { CreateRoomUseCase } from "@usecases/room/CreateRoomUseCase";
 import { Request, Response } from "express";
 
-
 export class CreateRoomController {
     constructor(
         private createRoomUseCase: CreateRoomUseCase

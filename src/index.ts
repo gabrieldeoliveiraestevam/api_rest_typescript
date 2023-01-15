@@ -2,6 +2,7 @@ import { Config } from "./config";
 import express from "express";
 import { AppDataSource } from "./data-source";
 import routes from "./routes";
+import './shared/container';
 var morgan = require('morgan');
 
 // Conecção do banco de dadoss

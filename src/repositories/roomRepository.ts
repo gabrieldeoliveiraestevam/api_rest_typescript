@@ -1,9 +1,11 @@
 import { Room } from '@entities/Room';
 import { Student } from '@entities/Student';
 import { IRoomRepository } from '@usecases/port/repositories/IRoomRepository';
+import { injectable } from 'tsyringe';
 import { Repository } from 'typeorm/repository/Repository';
 import { AppDataSource } from '../data-source';
 
+@injectable()
 class RoomRepositoryTypeOrm implements IRoomRepository{
   private repository: Repository<Room>;
 
