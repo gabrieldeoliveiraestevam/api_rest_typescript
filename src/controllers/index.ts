@@ -6,7 +6,7 @@ import { ListRoomController } from "./room/ListRoomController";
 import { CreateStudentController } from "./student/CreateStudentController";
 import { CreateSubjectController } from "./subject/CreateSubjectController";
 import { CreateVideoController } from "./video/CreateVideoController";
-import './../shared/container';
+import '@shared/container';
 
 // Controllers
 const createSubjectController = container.resolve(CreateSubjectController);

@@ -23,7 +23,8 @@
       "@repositories/*": ["./src/repositories/*"],
       "@services/*": ["./src/services/*"],
       "@usecases/*": ["./src/usecases/*"],
-      "@config/*": ["./src/config/*"]
+      "@config/*": ["./src/config/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": [
