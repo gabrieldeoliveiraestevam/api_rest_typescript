@@ -10,6 +10,7 @@ import { ListRoomUseCase } from "@usecases/room/LIstRoomUseCase";
 import { CreateStudentUseCase } from "@usecases/student/CreateStudentUseCase";
 import { CreateSubjectUseCase } from "@usecases/subject/CreateSubjectUseCase";
 import { CreateVideoUseCase } from "@usecases/video/CreateVideoUseCase";
+import { container } from "tsyringe";
 import { AddStudentInRoomController } from "./room/AddStudentInRoomController";
 import { AddSubjectInRoomController } from "./room/AddSubjectInRoomController";
 import { CreateRoomController } from "./room/CreateRoomController";
@@ -17,6 +18,7 @@ import { ListRoomController } from "./room/ListRoomController";
 import { CreateStudentController } from "./student/CreateStudentController";
 import { CreateSubjectController } from "./subject/CreateSubjectController";
 import { CreateVideoController } from "./video/CreateVideoController";
+import './../shared/container';
 
 // Repositories
 const subjectRepository = new SubjectRepositoryTypeOrm();
@@ -34,7 +36,7 @@ const createSubjectController = new CreateSubjectController(createSubjectUseCase
 export { createSubjectUseCase , createSubjectController }
 
 
-const createRoomUseCase = new CreateRoomUseCase(roomRepository);
+const createRoomUseCase = container.resolve(CreateRoomUseCase);
 const createRoomController = new CreateRoomController(createRoomUseCase);
 
 export { createRoomUseCase , createRoomController }
