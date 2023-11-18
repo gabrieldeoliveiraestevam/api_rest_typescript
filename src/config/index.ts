@@ -11,7 +11,7 @@ export const Config = {
     HOST: process.env.DB_HOST ?? 'localhost',
     DATABASE: process.env.DB_NAME ?? 'postgres',
     USERNAME: process.env.DB_USER ?? 'postgres',
-    PASSWORD: process.env.DB_PASS ?? 'example',
+    PASSWORD: process.env.DB_PASS ?? 'postgres',
     PORT: Number(process.env.DB_PORT ?? 5432),
   },
   EMAIL_OUTLOOK: {
