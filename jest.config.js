@@ -7,6 +7,7 @@ module.exports = {
   rootDir: root,
   displayName: 'root-tests',
   testMatch: ['<rootDir>/src/**/*.spec.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'node',
   clearMocks: true,
   preset: 'ts-jest',

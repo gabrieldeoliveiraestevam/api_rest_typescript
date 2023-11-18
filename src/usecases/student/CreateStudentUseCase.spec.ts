@@ -11,26 +11,43 @@ const mockRequest: ICreateStudentRequest = {
     email: "teste@email.com"
 };
 
-
 describe('CreateStudentUseCase', () => {
-
-    test('Test', async () => {
-        let mockRepositoryTypeOrm: MockProxy<StudentRepositoryTypeOrm>;
-        let mockResponseStudent: MockProxy<Student>;
-        let mockSendEmail: MockProxy<SendEmail>;
+    let mockRepositoryTypeOrm: MockProxy<StudentRepositoryTypeOrm>;
+    let mockResponseStudent: MockProxy<Student>;
+    let mockSendEmail: MockProxy<SendEmail>;
+    
+    beforeEach( async () => { 
 
         mockRepositoryTypeOrm = mock();
         mockResponseStudent = mock();
+        mockSendEmail = mock();
 
         mockReset(mockRepositoryTypeOrm);
+        mockReset(mockSendEmail);
 
         mockRepositoryTypeOrm.create.mockReturnValue(mockResponseStudent);
+    } )
+
+    test('Should return class student when correct execution', async () => {
         
-        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm);
+        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm,mockSendEmail);
 
         const response = await sut.execute(mockRequest);
 
         expect(response).toEqual(mockResponseStudent);
     
+    });
+
+    test('Should throw an error when an error occurs in create', async () => {
+        mockRepositoryTypeOrm.create.mockImplementation( () => {
+            throw new Error('any');
+        })
+        
+        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm,mockSendEmail);
+
+        expect(async () => {
+            await sut.execute(mockRequest);
+          }).rejects.toThrow();
+
     });
 })
