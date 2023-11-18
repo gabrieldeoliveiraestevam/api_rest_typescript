@@ -1,9 +1,10 @@
 import { Config } from '@config/index';
 import nodemailer from 'nodemailer';
 import { injectable } from 'tsyringe';
+import { ISendEmail } from './domain/ISendEmail';
 
 @injectable()
-class SendEmail {
+class SendEmail implements ISendEmail {
     private transport;
 
     constructor(
@@ -20,7 +21,7 @@ class SendEmail {
         });
     }
 
-    async execute(to: string, name: string){
+    async execute(to: string, name: string): Promise<void>{
         this.transport.sendMail({
             from: Config.EMAIL_OUTLOOK.USER,
             to: to,

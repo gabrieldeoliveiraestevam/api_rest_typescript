@@ -1,4 +1,4 @@
-import { SendEmail } from "@services/sendEmail";
+import { ISendEmail } from "@services/domain/ISendEmail";
 import { IStudentRepository } from "@usecases/port/repositories/IStudentRepository";
 import { inject, injectable } from "tsyringe";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
@@ -10,7 +10,7 @@ export class CreateStudentUseCase {
         @inject("StudentRepositoryTypeOrm")
         private studentRepository: IStudentRepository,
         @inject("SendEmail")
-        private sendEmail: SendEmail,
+        private sendEmail: ISendEmail,
     ){
 
     }

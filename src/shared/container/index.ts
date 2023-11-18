@@ -8,6 +8,7 @@ import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
 import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
 import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
 import { VideoRepositoryTypeOrm } from "@repositories/videoRepository";
+import { ISendEmail } from "@services/domain/ISendEmail";
 import { SendEmail } from "@services/sendEmail";
 import { IRoomRepository } from "@usecases/port/repositories/IRoomRepository";
 import { IStudentRepository } from "@usecases/port/repositories/IStudentRepository";
@@ -46,4 +47,4 @@ container.register("AddStudentInRoomController", AddStudentInRoomController);
 container.register("AddSubjectInRoomController", AddSubjectInRoomController);
 
 // Service
-container.register("SendEmail", SendEmail);
+container.register<ISendEmail>("SendEmail", SendEmail);
