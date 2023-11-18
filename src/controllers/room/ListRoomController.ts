@@ -1,4 +1,4 @@
-import { ListRoomUseCase } from "@usecases/room/LIstRoomUseCase";
+import { ListRoomUseCase } from "@usecases/room/ListRoomUseCase";
 import { Request, Response } from "express";
 import { inject, injectable } from "tsyringe";
 

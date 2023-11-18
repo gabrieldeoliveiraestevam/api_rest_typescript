@@ -17,7 +17,7 @@ import { IVideoRepository } from "@usecases/port/repositories/IVideoRepository";
 import { AddStudentInRoomUseCase } from "@usecases/room/AddStudentInRoomUseCase";
 import { AddSubjectInRoomUseCase } from "@usecases/room/AddSubjectInRoomUseCase";
 import { CreateRoomUseCase } from "@usecases/room/CreateRoomUseCase";
-import { ListRoomUseCase } from "@usecases/room/LIstRoomUseCase";
+import { ListRoomUseCase } from "@usecases/room/ListRoomUseCase";
 import { CreateStudentUseCase } from "@usecases/student/CreateStudentUseCase";
 import { CreateSubjectUseCase } from "@usecases/subject/CreateSubjectUseCase";
 import { CreateVideoUseCase } from "@usecases/video/CreateVideoUseCase";
