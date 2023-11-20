@@ -8,8 +8,12 @@ import { RoomRepositoryTypeOrm } from "@repositories/roomRepository";
 import { StudentRepositoryTypeOrm } from "@repositories/studentRepository";
 import { SubjectRepositoryTypeOrm } from "@repositories/subjectRepository";
 import { VideoRepositoryTypeOrm } from "@repositories/videoRepository";
+import { IRabbitMQ } from "@services/domain/IRabbitMQ";
 import { ISendEmail } from "@services/domain/ISendEmail";
+import { ISendStudentGrade } from "@services/domain/ISendStudentGrade";
+import { RabbitMQ } from "@services/RabbitMQ";
 import { SendEmail } from "@services/sendEmail";
+import { SendStudentGrade } from "@services/SendStudentGrade";
 import { IRoomRepository } from "@usecases/port/repositories/IRoomRepository";
 import { IStudentRepository } from "@usecases/port/repositories/IStudentRepository";
 import { ISubjectRepository } from "@usecases/port/repositories/ISubjectRepository";
@@ -48,3 +52,7 @@ container.register("AddSubjectInRoomController", AddSubjectInRoomController);
 
 // Service
 container.register<ISendEmail>("SendEmail", SendEmail, { lifecycle: Lifecycle.Singleton });
+container.register<ISendStudentGrade>("SendStudentGrade", SendStudentGrade);
+
+// AMQP Service
+container.register<IRabbitMQ>("RabbitMQ", RabbitMQ, { lifecycle: Lifecycle.Singleton });

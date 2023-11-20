@@ -19,5 +19,8 @@ export const Config = {
     PORT: process.env.EMAIL_OUTLOOK_PORT,
     USER: process.env.EMAIL_OUTLOOK_USER,
     PASS: process.env.EMAIL_OUTLOOK_PASS,
-  }
+  },
+  RABBITMQ: {
+    URI: process.env.URI_RABBITMQ ?? 'amqp://guest:guest@localhost:5672',
+  },
 };

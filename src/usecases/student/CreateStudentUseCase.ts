@@ -1,4 +1,5 @@
 import { ISendEmail } from "@services/domain/ISendEmail";
+import { ISendStudentGrade } from "@services/domain/ISendStudentGrade";
 import { IStudentRepository } from "@usecases/port/repositories/IStudentRepository";
 import { inject, injectable } from "tsyringe";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
@@ -11,6 +12,8 @@ export class CreateStudentUseCase {
         private studentRepository: IStudentRepository,
         @inject("SendEmail")
         private sendEmail: ISendEmail,
+        @inject("SendStudentGrade")
+        private sendStudentGrade: ISendStudentGrade,
     ){
 
     }
@@ -28,9 +31,16 @@ export class CreateStudentUseCase {
 
             await this.studentRepository.save(student);
             
+            // 
+            await this.sendStudentGrade.publish(
+                'exchange-student-grade', 
+                'routing-key-queue-student-grade', 
+                "Aluno " + data.name + " adicionado com sucesso!"
+                );
+            
             // Retira envio de email temporariamente - bloqueio de conta outlook
             // await this.sendEmail.execute(student.email, student.name);
-    
+            
             return student;
         } catch (error) {
             console.log(error);
