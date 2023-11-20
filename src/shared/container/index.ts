@@ -21,7 +21,7 @@ import { ListRoomUseCase } from "@usecases/room/ListRoomUseCase";
 import { CreateStudentUseCase } from "@usecases/student/CreateStudentUseCase";
 import { CreateSubjectUseCase } from "@usecases/subject/CreateSubjectUseCase";
 import { CreateVideoUseCase } from "@usecases/video/CreateVideoUseCase";
-import { container } from "tsyringe";
+import { container, Lifecycle } from "tsyringe";
 
 // Repository
 container.register<IRoomRepository>("RoomRepositoryTypeOrm", RoomRepositoryTypeOrm);
@@ -47,4 +47,4 @@ container.register("AddStudentInRoomController", AddStudentInRoomController);
 container.register("AddSubjectInRoomController", AddSubjectInRoomController);
 
 // Service
-container.register<ISendEmail>("SendEmail", SendEmail);
+container.register<ISendEmail>("SendEmail", SendEmail, { lifecycle: Lifecycle.Singleton });

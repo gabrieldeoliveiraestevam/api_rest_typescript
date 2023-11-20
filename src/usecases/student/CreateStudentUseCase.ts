@@ -27,8 +27,9 @@ export class CreateStudentUseCase {
             );
 
             await this.studentRepository.save(student);
-
-            await this.sendEmail.execute(student.email, student.name);
+            
+            // Retira envio de email temporariamente - bloqueio de conta outlook
+            // await this.sendEmail.execute(student.email, student.name);
     
             return student;
         } catch (error) {
