@@ -1,5 +1,5 @@
-import { ISendEmail } from "@services/domain/ISendEmail";
-import { ISendStudentGrade } from "@services/domain/ISendStudentGrade";
+import { ISendEmail } from "@services/sendEmail/domain/ISendEmail";
+import { ISendStudentGrade } from "@services/sendStudentGrade/domain/ISendStudentGrade";
 import { IStudentRepository } from "@usecases/port/repositories/IStudentRepository";
 import { inject, injectable } from "tsyringe";
 import { ICreateStudentRequest } from "./domain/ICreateStudentRequest";
@@ -31,13 +31,18 @@ export class CreateStudentUseCase {
 
             await this.studentRepository.save(student);
             
-            // 
-            await this.sendStudentGrade.publish(
-                'exchange-student-grade', 
-                'routing-key-queue-student-grade', 
-                "Aluno " + data.name + " adicionado com sucesso!"
-                );
-            
+            const gradeSent = await this.sendStudentGrade.execute(
+                student.id,
+                student.name,
+                10
+            );
+
+            if (gradeSent) {
+                console.log(`Nota do aluno ${data.name} enviada para o serviço de notas`);
+            } else {
+                console.log(`Problema no envio da nota do aluno ${data.name}`);
+            }
+
             // Retira envio de email temporariamente - bloqueio de conta outlook
             // await this.sendEmail.execute(student.email, student.name);
             
