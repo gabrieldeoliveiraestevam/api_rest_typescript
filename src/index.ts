@@ -3,6 +3,7 @@ import express from "express";
 import { AppDataSource } from "./data-source";
 import routes from "./routes";
 import { SetupAmqpProvider } from "./providers/amqpProvider";
+// eslint-disable-next-line no-var, @typescript-eslint/no-var-requires
 var morgan = require('morgan');
 
 // Conecção do banco de dadoss

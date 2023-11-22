@@ -4,16 +4,16 @@ import {
     JoinTable,
     ManyToMany,
     PrimaryGeneratedColumn,
-} from 'typeorm'
-import { Room } from './Room'
+} from 'typeorm';
+import { Room } from './Room';
 
 @Entity('subjects')
 export class Subject {
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
 
     @Column({ type: 'text' })
-    name: string
+    name: string;
 
     // Relação muito para muitos
     @ManyToMany(() => Room, (room) => room.subjects)
@@ -31,5 +31,5 @@ export class Subject {
             referencedColumnName: 'id',
         },
     })
-    rooms: Room[]
-}
+    rooms: Room[];
+};
