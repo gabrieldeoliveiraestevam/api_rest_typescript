@@ -2,7 +2,7 @@ import { Config } from "./config";
 import express from "express";
 import { AppDataSource } from "./data-source";
 import routes from "./routes";
-import { SetupAmqpProvider } from "./providers/amqpProvider";
+import { SetupAmqpProvider } from "./providers/amqp-provider";
 // eslint-disable-next-line no-var, @typescript-eslint/no-var-requires
 var morgan = require('morgan');
 

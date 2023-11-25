@@ -1,11 +1,11 @@
 import { container } from "tsyringe";
-import { AddStudentInRoomController } from "./room/AddStudentInRoomController";
-import { AddSubjectInRoomController } from "./room/AddSubjectInRoomController";
-import { CreateRoomController } from "./room/CreateRoomController";
-import { ListRoomController } from "./room/ListRoomController";
-import { CreateStudentController } from "./student/CreateStudentController";
-import { CreateSubjectController } from "./subject/CreateSubjectController";
-import { CreateVideoController } from "./video/CreateVideoController";
+import { AddStudentInRoomController } from "./room/add-student-in-room-controller";
+import { AddSubjectInRoomController } from "./room/add-subject-in-room-controller";
+import { CreateRoomController } from "./room/create-room-controller";
+import { ListRoomController } from "./room/list-room-controller";
+import { CreateStudentController } from "./student/create-student-controller";
+import { CreateSubjectController } from "./subject/create-subject-controller";
+import { CreateVideoController } from "./video/create-video-controller";
 import '@shared/container';
 
 // Controllers
