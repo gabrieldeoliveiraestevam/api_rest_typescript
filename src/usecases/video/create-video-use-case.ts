@@ -39,7 +39,7 @@ export class CreateVideoUseCase {
 
         } catch (error) {
             console.log(error);
-            return failure(new Error('Error CreateVideoUseCase'));
+            return failure(new Error('Error CreateaVideoUseCase'));
         }
   
     };
