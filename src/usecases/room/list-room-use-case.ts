@@ -1,6 +1,7 @@
-import { Room } from "@entities/room";
+import { failure, succes } from "@usecases/errors/either";
 import { IRoomRepository } from "@usecases/port/repositories/room-repository";
 import { inject, injectable } from "tsyringe";
+import { IListRoomResponse } from "./domain/list-room-response";
 
 @injectable()
 export class ListRoomUseCase {
@@ -10,17 +11,17 @@ export class ListRoomUseCase {
     ){
 
     }
-    async execute(): Promise<Room[]> { 
+    async execute(): Promise<IListRoomResponse> { 
 
         try {
 
             // Busca Rooms com todos os seus relacionamentos de Subject
             const rooms = await this.roomRepository.find();
 
-            return rooms;
+            return succes({list: rooms});
         } catch (error) {
             console.log(error);
-            throw new Error('Error AddSubjectInRoomUseCase')
+            return failure(new Error('Error AddSubjectInRoomUseCase'));
         }
   
     };

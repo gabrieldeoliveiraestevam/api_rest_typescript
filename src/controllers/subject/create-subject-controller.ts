@@ -11,19 +11,16 @@ export class CreateSubjectController {
         
     }
     async handle(request: Request, response: Response) { 
-        try {
-            const { name } = request.body;
+        const { name } = request.body;
 
-            const subject = await this.createSubjectUseCase.execute({
-                name: name
-            });
+        const result = await this.createSubjectUseCase.execute({
+            name: name
+        });
 
-            return response.status(200).json(subject)
-        } catch (error) {
-            console.log(error);
-            return response.status(500).json({
-                message: 'Internal Server Error!'
-            });
+        if (result.isSucces()){
+            return response.status(200).json(result);
+        } else {
+            return response.status(500).json({message: result.value.message});
         }
     };
 };

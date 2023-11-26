@@ -5,6 +5,10 @@ import { SubjectRepositoryTypeOrm } from "@repositories/subject-repository";
 import { Subject } from "@entities/subject";
 import { AddSubjectInRoomUseCase } from "./add-subject-in-room-use-case";
 import { IAddSubjectInRoomRequest } from './domain/add-subject-in-room-request';
+import { succes } from '@usecases/errors/either';
+import { RoomNotExistError } from '@usecases/errors/room-not-exist-error';
+import { SubjectNotExistError } from '@usecases/errors/subject-not-exist-error';
+import { SubjectExistInRoomError } from '@usecases/errors/subject-exist-in-room-error';
 
 const mockRequest: IAddSubjectInRoomRequest = {
     subject_id: 1,
@@ -55,7 +59,7 @@ describe('AddSubjectInRoomUseCase', () => {
 
         const response = await sut.execute(mockRequest);
 
-        expect(response).toEqual(roomUpdate);
+        expect(response).toEqual(succes(roomUpdate));
     
     });
 
@@ -64,9 +68,11 @@ describe('AddSubjectInRoomUseCase', () => {
         
         const sut = new AddSubjectInRoomUseCase(mockSubjectRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(RoomNotExistError);
 
     });
 
@@ -75,9 +81,11 @@ describe('AddSubjectInRoomUseCase', () => {
         
         const sut = new AddSubjectInRoomUseCase(mockSubjectRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(SubjectNotExistError);
 
     });
 
@@ -103,9 +111,26 @@ describe('AddSubjectInRoomUseCase', () => {
 
         const sut = new AddSubjectInRoomUseCase(mockSubjectRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(SubjectExistInRoomError);
+
+    });
+
+    test('Should throw an error when occurs an exception error', async () => {
+        mockSubjectRepositoryTypeOrm.findOneById.mockRejectedValue(() => {
+            throw new Error('any error');
+        });
+        
+        const sut = new AddSubjectInRoomUseCase(mockSubjectRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
+
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(Error);
 
     });
 });

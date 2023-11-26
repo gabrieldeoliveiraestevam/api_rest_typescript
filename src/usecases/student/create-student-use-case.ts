@@ -1,6 +1,5 @@
+import { failure, succes } from "@usecases/errors/either";
 import { IStudentRepository } from "@usecases/port/repositories/student-repository";
-import { ISendEmail } from "@usecases/port/service/send-email";
-import { ISendStudentGrade } from "@usecases/port/service/send-student-grade";
 import { inject, injectable } from "tsyringe";
 import { ICreateStudentRequest } from "./domain/create-student-request";
 import { ICreateStudentResponse } from "./domain/create-student-response";
@@ -10,10 +9,6 @@ export class CreateStudentUseCase {
     constructor(
         @inject("StudentRepositoryTypeOrm")
         private studentRepository: IStudentRepository,
-        @inject("SendEmail")
-        private sendEmail: ISendEmail,
-        @inject("SendStudentGrade")
-        private sendStudentGrade: ISendStudentGrade,
     ){
 
     }
@@ -30,26 +25,14 @@ export class CreateStudentUseCase {
             );
 
             await this.studentRepository.save(student);
-            
-            const gradeSent = await this.sendStudentGrade.execute(
-                student.id,
-                student.name,
-                10
-            );
-
-            if (gradeSent) {
-                console.log(`Nota do aluno ${data.name} enviada para o serviço de notas`);
-            } else {
-                console.log(`Problema no envio da nota do aluno ${data.name}`);
-            }
 
             // Retira envio de email temporariamente - bloqueio de conta outlook
             // await this.sendEmail.execute(student.email, student.name);
             
-            return student;
+            return succes(student);
         } catch (error) {
             console.log(error);
-            throw new Error('Error CreateStudentUseCase')
+            return failure(new Error('Error CreateStudentUseCase'));
         }
   
     };

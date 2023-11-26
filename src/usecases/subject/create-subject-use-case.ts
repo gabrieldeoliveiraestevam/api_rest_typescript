@@ -1,3 +1,4 @@
+import { failure, succes } from "@usecases/errors/either";
 import { ISubjectRepository } from "@usecases/port/repositories/subject-repository";
 import { inject, injectable } from "tsyringe";
 import { ICreateSubjectRequest } from "./domain/create-subject-request";
@@ -18,10 +19,10 @@ export class CreateSubjectUseCase {
 
             await this.subjectRepository.save(subject);
     
-            return subject;
+            return succes(subject);
         } catch (error) {
             console.log(error);
-            throw new Error('Error CreateSubjectUseCase')
+            return failure(new Error('Error CreateSubjectUseCase'));
         }
   
     };

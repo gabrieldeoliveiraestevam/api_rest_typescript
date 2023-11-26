@@ -41,11 +41,6 @@ class AMQPService {
 
     private async setupQueuesAndExchanges(channel: Channel): Promise<void> {
         channel.assertExchange(
-            'exchange-student-grade',
-            'direct',
-            this.assertExchangeOptions,
-        );
-        channel.assertExchange(
             'exchange-student-presence-create',
             'direct',
             this.assertExchangeOptions,

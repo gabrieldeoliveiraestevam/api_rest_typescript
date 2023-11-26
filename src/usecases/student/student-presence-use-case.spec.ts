@@ -4,6 +4,9 @@ import { Student } from "@entities/student";
 import { IStudentPresenceRequest } from "./domain/student-presence-request";
 import { StudentPresenceService } from "@services/student-presence/student-presence";
 import { StudentPresenceUseCase } from "./student-presence-use-case";
+import { succes } from "@usecases/errors/either";
+import { StudentNotExistError } from "@usecases/errors/student-not-exist-error";
+import { StudentPresenceNotSentError } from "@usecases/errors/student-presence-not-sent-error";
 
 const mockRequest: IStudentPresenceRequest = {
     id: 1,
@@ -35,28 +38,29 @@ describe('StudentPresenceUseCase', () => {
 
         const response = await sut.execute(mockRequest);
 
-        console.log(response);
-    
+        expect(response).toEqual(succes());
     });
 
     test('Should throw an error when student not exist', async () => {
         mockRepositoryTypeOrm.findOneById.mockResolvedValue(null);
         const sut = new StudentPresenceUseCase(mockRepositoryTypeOrm,mockStudentPresenceService);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
-    
+        const response = await sut.execute(mockRequest);
+
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(StudentNotExistError);
     });
 
     test('Should throw an error when student presence was not sent', async () => {
         mockStudentPresenceService.execute.mockResolvedValue(false);
         const sut = new StudentPresenceUseCase(mockRepositoryTypeOrm,mockStudentPresenceService);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
-    
+        const response = await sut.execute(mockRequest);
+
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(StudentPresenceNotSentError);
     });
 
     test('Should throw an error when an error occurs in execute service', async () => {
@@ -66,9 +70,10 @@ describe('StudentPresenceUseCase', () => {
         
         const sut = new StudentPresenceUseCase(mockRepositoryTypeOrm,mockStudentPresenceService);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
 
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(Error);
     });
 })

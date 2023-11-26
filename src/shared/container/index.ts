@@ -11,7 +11,6 @@ import { SubjectRepositoryTypeOrm } from "@repositories/subject-repository";
 import { VideoRepositoryTypeOrm } from "@repositories/video-repository";
 import { AMQPService } from "@services/rabbit-mq/amqp-service";
 import { ProducerRabbitMQ } from "@services/rabbit-mq/producer-rabbit-mq";
-import { SendStudentGrade } from "@services/send-student-grade/send-student-grade";
 import { SendEmail } from "@services/sendEmail/send-email";
 import { StudentPresenceService } from "@services/student-presence/student-presence";
 import { IRoomRepository } from "@usecases/port/repositories/room-repository";
@@ -19,7 +18,6 @@ import { IStudentRepository } from "@usecases/port/repositories/student-reposito
 import { ISubjectRepository } from "@usecases/port/repositories/subject-repository";
 import { IVideoRepository } from "@usecases/port/repositories/video-repository";
 import { ISendEmail } from "@usecases/port/service/send-email";
-import { ISendStudentGrade } from "@usecases/port/service/send-student-grade";
 import { IStudentPresenceService } from "@usecases/port/service/student-presence-service";
 import { AddStudentInRoomUseCase } from "@usecases/room/add-student-in-room-use-case";
 import { AddSubjectInRoomUseCase } from "@usecases/room/add-subject-in-room-use-case";
@@ -58,7 +56,6 @@ container.register("StudentPresenceController", StudentPresenceController);
 
 // Service
 container.register<ISendEmail>("SendEmail", SendEmail, { lifecycle: Lifecycle.Singleton });
-container.register<ISendStudentGrade>("SendStudentGrade", SendStudentGrade, { lifecycle: Lifecycle.Singleton });
 container.register<IStudentPresenceService>("StudentPresenceService", StudentPresenceService, { lifecycle: Lifecycle.Singleton });
 
 // AMQP Service

@@ -3,6 +3,7 @@ import { RoomRepositoryTypeOrm } from "@repositories/room-repository";
 import { Room } from "@entities/room";
 import { ICreateRoomRequest } from "./domain/create-room-request";
 import { CreateRoomUseCase } from './create-room-use-case';
+import { succes } from '@usecases/errors/either';
 
 const mockRequest: ICreateRoomRequest = {
     name: "teste",
@@ -29,7 +30,7 @@ describe('CreateRoomUseCase', () => {
 
         const response = await sut.execute(mockRequest);
 
-        expect(response).toEqual(mockResponseRoom);
+        expect(response).toEqual(succes(mockResponseRoom));
     
     });
 
@@ -40,9 +41,11 @@ describe('CreateRoomUseCase', () => {
         
         const sut = new CreateRoomUseCase(mockRoomRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(Error);
 
     });
 

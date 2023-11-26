@@ -1,7 +1,11 @@
+import { failure, succes } from "@usecases/errors/either";
+import { StudentNotExistError } from "@usecases/errors/student-not-exist-error";
+import { StudentPresenceNotSentError } from "@usecases/errors/student-presence-not-sent-error";
 import { IStudentRepository } from "@usecases/port/repositories/student-repository";
 import { IStudentPresenceService } from "@usecases/port/service/student-presence-service";
 import { inject, injectable } from "tsyringe";
 import { IStudentPresenceRequest } from "./domain/student-presence-request";
+import { IStudentPresenceResponse } from "./domain/student-presence-response";
 
 @injectable()
 export class StudentPresenceUseCase {
@@ -13,7 +17,7 @@ export class StudentPresenceUseCase {
     ){
 
     }
-    async execute(data: IStudentPresenceRequest): Promise<void> { 
+    async execute(data: IStudentPresenceRequest): Promise<IStudentPresenceResponse> { 
 
         try {
             const studentExist = await this.studentRepository.findOneById(data.id);
@@ -26,15 +30,17 @@ export class StudentPresenceUseCase {
                 );
 
                 if(!sentPresenceStudent){
-                    throw new Error('Student presence was not sent'); 
+                    return failure(new StudentPresenceNotSentError());
                 }
 
             } else {
-                throw new Error('Student not exist');                
+                return failure(new StudentNotExistError());               
             }
+
+            return succes();
         } catch (error) {
             console.log(error);
-            throw new Error('Error StudentPresenceUseCase');
+            return failure(new Error('Error StudentPresenceUseCase'));
         }
   
     };

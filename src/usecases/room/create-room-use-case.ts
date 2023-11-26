@@ -1,3 +1,4 @@
+import { failure, succes } from "@usecases/errors/either";
 import { IRoomRepository } from "@usecases/port/repositories/room-repository";
 import { ICreateSubjectResponse } from "@usecases/subject/domain/create-subject-response";
 import { inject, injectable } from "tsyringe";
@@ -21,10 +22,10 @@ export class CreateRoomUseCase {
 
             await this.roomRepository.save(room);
     
-            return room;
+            return succes(room);
         } catch (error) {
             console.log(error);
-            throw new Error('Error CreateRoomUseCase')
+            return failure(new Error('Error CreateRoomUseCase'));
         }
   
     };

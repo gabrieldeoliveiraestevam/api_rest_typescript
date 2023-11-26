@@ -6,6 +6,8 @@ import { Video } from '@entities/video';
 import { VideoRepositoryTypeOrm } from '@repositories/video-repository';
 import { Room } from '@entities/room';
 import { CreateVideoUseCase } from './create-video-use-case';
+import { succes } from '@usecases/errors/either';
+import { RoomNotExistError } from '@usecases/errors/room-not-exist-error';
 
 const mockRequest: ICreateVideoRequest = {
     title: "teste",
@@ -40,8 +42,7 @@ describe('CreateVideoUseCase', () => {
 
         const response = await sut.execute(mockRequest);
 
-        expect(response).toEqual(mockResponseVideo);
-    
+        expect(response).toEqual(succes(mockResponseVideo));
     });
 
     test('Should throw an error when room not exist', async () => {
@@ -49,10 +50,11 @@ describe('CreateVideoUseCase', () => {
         
         const sut = new CreateVideoUseCase(mockRoomRepositoryTypeOrm,mockVideoRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
-
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(RoomNotExistError);
     });
 
     test('Should throw an error when an error occurs in create', async () => {
@@ -62,9 +64,11 @@ describe('CreateVideoUseCase', () => {
         
         const sut = new CreateVideoUseCase(mockRoomRepositoryTypeOrm,mockVideoRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(Error);
 
     });
 

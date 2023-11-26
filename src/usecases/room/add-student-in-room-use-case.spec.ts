@@ -5,6 +5,10 @@ import { RoomRepositoryTypeOrm } from "@repositories/room-repository";
 import { IAddStudentInRoomRequest } from "./domain/add-student-in-room-request";
 import { AddStudentInRoomUseCase } from "./add-student-in-room-use-case";
 import { Room } from "@entities/room";
+import { succes } from "@usecases/errors/either";
+import { RoomNotExistError } from "@usecases/errors/room-not-exist-error";
+import { StudentNotExistError } from "@usecases/errors/student-not-exist-error";
+import { StudentExistInRoomError } from "@usecases/errors/student-exist-in-room-error";
 
 const mockRequest: IAddStudentInRoomRequest = {
     student_id: 1,
@@ -57,7 +61,7 @@ describe('AddStudentInRoomUseCase', () => {
 
         const response = await sut.execute(mockRequest);
 
-        expect(response).toEqual(roomUpdate);
+        expect(response).toEqual(succes(roomUpdate));
     
     });
 
@@ -66,10 +70,11 @@ describe('AddStudentInRoomUseCase', () => {
         
         const sut = new AddStudentInRoomUseCase(mockStudentRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
-
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(RoomNotExistError);
     });
 
     test('Should throw an error when student not exist', async () => {
@@ -77,10 +82,11 @@ describe('AddStudentInRoomUseCase', () => {
         
         const sut = new AddStudentInRoomUseCase(mockStudentRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
-
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(StudentNotExistError);
     });
 
     test('Should throw an error when student exist in room', async () => {
@@ -107,9 +113,25 @@ describe('AddStudentInRoomUseCase', () => {
 
         const sut = new AddStudentInRoomUseCase(mockStudentRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(StudentExistInRoomError);
 
+    });
+
+    test('Should throw an error when occurs expection error', async () => {
+        mockRoomRepositoryTypeOrm.findOneById.mockRejectedValue(() => {
+            throw new Error('any error');
+        })
+        
+        const sut = new AddStudentInRoomUseCase(mockStudentRepositoryTypeOrm,mockRoomRepositoryTypeOrm);
+
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(Error);
     });
 });

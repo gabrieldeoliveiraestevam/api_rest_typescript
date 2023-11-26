@@ -1,3 +1,5 @@
+import { failure, succes } from "@usecases/errors/either";
+import { RoomNotExistError } from "@usecases/errors/room-not-exist-error";
 import { IRoomRepository } from "@usecases/port/repositories/room-repository";
 import { IVideoRepository } from "@usecases/port/repositories/video-repository";
 import { inject, injectable } from "tsyringe";
@@ -30,14 +32,14 @@ export class CreateVideoUseCase {
                 
                 await this.videoRepository.save(video);
 
-                return video;
+                return succes(video);
             } else {
-                throw new Error('Room not exist');
+                return failure(new RoomNotExistError());
             }
 
         } catch (error) {
             console.log(error);
-            throw new Error('Error CreateVideoUseCase')
+            return failure(new Error('Error CreateVideoUseCase'));
         }
   
     };

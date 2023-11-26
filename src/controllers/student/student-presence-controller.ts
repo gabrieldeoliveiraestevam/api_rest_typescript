@@ -9,21 +9,18 @@ export class StudentPresenceController {
         private studentPresenceUseCase: StudentPresenceUseCase
     ) {}
     async handle(request: Request, response: Response) {
-        try {
-            const { id, date, presence } = request.body;
+        const { id, date, presence } = request.body;
 
-            await this.studentPresenceUseCase.execute({
-                id,
-                date,
-                presence
-            });
+        const result = await this.studentPresenceUseCase.execute({
+            id,
+            date,
+            presence
+        });
 
-            return response.status(202).json();
-        } catch (error) {
-            console.log(error);
-            return response.status(500).json({
-                message: 'Internal Server Error!',
-            });
+        if (result.isSucces()){
+            return response.status(200).json(result);
+        } else {
+            return response.status(500).json({message: result.value.message});
         }
     }
 }

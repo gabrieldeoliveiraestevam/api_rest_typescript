@@ -1,3 +1,7 @@
+import { failure, succes } from "@usecases/errors/either";
+import { RoomNotExistError } from "@usecases/errors/room-not-exist-error";
+import { StudentExistInRoomError } from "@usecases/errors/student-exist-in-room-error";
+import { StudentNotExistError } from "@usecases/errors/student-not-exist-error";
 import { IRoomRepository } from "@usecases/port/repositories/room-repository";
 import { IStudentRepository } from "@usecases/port/repositories/student-repository";
 import { inject, injectable } from "tsyringe";
@@ -20,20 +24,20 @@ export class AddStudentInRoomUseCase {
             const roomExist = await this.roomRepository.findOneById(data.room_id)
 
             if (!roomExist) {
-                throw new Error('Room not exist');
-            }
+                return failure(new RoomNotExistError());
+            };
 
             const studentExist = await this.studentRepository.findOneById(data.student_id);
 
             if (!studentExist) {
-                throw new Error('Student not exist');
-            }
+                return failure(new StudentNotExistError());
+            };
 
             const studentExistInRoom = roomExist.students.find(student => student.id == studentExist.id);
 
             if (studentExistInRoom){
-                throw new Error('Student exist in Room')
-            }
+                return failure(new StudentExistInRoomError());
+            };
 
             const roomUpdate = {
                 ...roomExist,
@@ -42,10 +46,10 @@ export class AddStudentInRoomUseCase {
 
             const roomResult = await this.roomRepository.save(roomUpdate)   
 
-            return roomResult;
+            return succes(roomResult);
         } catch (error) {
             console.log(error);
-            throw new Error('Error AddStudentInRoomUseCase')
+            return failure(new Error('Error AddStudentInRoomUseCase'));
         }
   
     };

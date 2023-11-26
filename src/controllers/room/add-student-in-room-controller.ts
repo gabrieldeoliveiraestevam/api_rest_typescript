@@ -11,20 +11,18 @@ export class AddStudentInRoomController {
         
     }
     async handle(request: Request, response: Response) { 
-        try {
-            const { room_id , student_id } = request.body;
+        const { room_id , student_id } = request.body;
 
-            const room = await this.addStudentInRoomUseCase.execute({
-                room_id: room_id,
-                student_id: student_id
-            });
+        const result = await this.addStudentInRoomUseCase.execute({
+            room_id: room_id,
+            student_id: student_id
+        });
 
-            return response.status(200).json(room)
-        } catch (error) {
-            console.log(error);
-            return response.status(500).json({
-                message: 'Internal Server Error!'
-            });
-        }
+        if (result.isSucces()){
+            return response.status(200).json(result)
+        } else {
+            return response.status(500).json({message: result.value.message});
+        };
+            
     };
 };

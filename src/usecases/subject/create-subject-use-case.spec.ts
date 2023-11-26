@@ -4,6 +4,7 @@ import { Subject } from '@entities/subject';
 import { SubjectRepositoryTypeOrm } from '@repositories/subject-repository';
 import { ICreateSubjectRequest } from './domain/create-subject-request';
 import { CreateSubjectUseCase } from './create-subject-use-case';
+import { succes } from '@usecases/errors/either';
 
 const mockRequest: ICreateSubjectRequest = {
     name: "teste"
@@ -29,7 +30,7 @@ describe('CreateSubjectUseCase', () => {
 
         const response = await sut.execute(mockRequest);
 
-        expect(response).toEqual(mockResponseSubject);
+        expect(response).toEqual(succes(mockResponseSubject));
     
     });
 
@@ -40,9 +41,11 @@ describe('CreateSubjectUseCase', () => {
         
         const sut = new CreateSubjectUseCase(mockSubjectRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+        
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(Error);
 
     });
 

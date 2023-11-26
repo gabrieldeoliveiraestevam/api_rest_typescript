@@ -11,15 +11,13 @@ export class ListRoomController {
         
     }
     async handle(request: Request, response: Response) { 
-        try {
-            const rooms = await this.listRoomUseCase.execute();
+        const result = await this.listRoomUseCase.execute();
 
-            return response.status(200).json(rooms)
-        } catch (error) {
-            console.log(error);
-            return response.status(500).json({
-                message: 'Internal Server Error!'
-            });
+        if (result.isSucces()){
+            return response.status(200).json(result);
+        } else {
+            return response.status(500).json({message: result.value.message});
         }
+
     };
 };

@@ -3,8 +3,7 @@ import { CreateStudentUseCase } from "./create-student-use-case";
 import { mock, MockProxy, mockReset } from 'jest-mock-extended';
 import { Student } from "@entities/student";
 import { ICreateStudentRequest } from "./domain/create-student-request"
-import { SendEmail } from "@services/sendEmail/send-email";
-import { SendStudentGrade } from "@services/send-student-grade/send-student-grade";
+import { succes } from "@usecases/errors/either";
 
 const mockRequest: ICreateStudentRequest = {
     name: 'teste',
@@ -15,40 +14,24 @@ const mockRequest: ICreateStudentRequest = {
 describe('CreateStudentUseCase', () => {
     let mockRepositoryTypeOrm: MockProxy<StudentRepositoryTypeOrm>;
     let mockResponseStudent: MockProxy<Student>;
-    let mockSendEmail: MockProxy<SendEmail>;
-    let mockSendStudentGrade: MockProxy<SendStudentGrade>;
     
     beforeEach( async () => { 
 
         mockRepositoryTypeOrm = mock();
         mockResponseStudent = mock();
-        mockSendEmail = mock();
-        mockSendStudentGrade = mock();
 
         mockReset(mockRepositoryTypeOrm);
-        mockReset(mockSendEmail);
 
         mockRepositoryTypeOrm.create.mockReturnValue(mockResponseStudent);
-        mockSendStudentGrade.execute.mockResolvedValue(true);
     } )
 
     test('Should return class student when correct execution', async () => {
         
-        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm,mockSendEmail,mockSendStudentGrade);
+        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm);
 
         const response = await sut.execute(mockRequest);
 
-        expect(response).toEqual(mockResponseStudent);
-    
-    });
-
-    test('Should return class student when correct execution', async () => {
-        mockSendStudentGrade.execute.mockResolvedValue(false);
-        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm,mockSendEmail,mockSendStudentGrade);
-
-        const response = await sut.execute(mockRequest);
-
-        expect(response).toEqual(mockResponseStudent);
+        expect(response).toEqual(succes(mockResponseStudent));
     
     });
 
@@ -57,11 +40,13 @@ describe('CreateStudentUseCase', () => {
             throw new Error('any');
         })
         
-        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm,mockSendEmail,mockSendStudentGrade);
+        const sut = new CreateStudentUseCase(mockRepositoryTypeOrm);
 
-        expect(async () => {
-            await sut.execute(mockRequest);
-          }).rejects.toThrow();
+        const response = await sut.execute(mockRequest);
+
+        expect(response.isFailure()).toBeTruthy();
+        expect(response.isSucces()).toBeFalsy();
+        expect(response.value).toBeInstanceOf(Error);
 
     });
 })
