@@ -1,7 +1,7 @@
 import { Config } from '@config/index';
+import { ISendEmail } from '@usecases/port/service/send-email';
 import nodemailer from 'nodemailer';
 import { injectable } from 'tsyringe';
-import { ISendEmail } from './domain/send-email';
 
 @injectable()
 class SendEmail implements ISendEmail {

@@ -1,6 +1,6 @@
+import { IProducerRabbitMQ } from '@usecases/port/service/producer-rabbit-mq';
+import { ISendStudentGrade } from '@usecases/port/service/send-student-grade';
 import { inject, injectable } from 'tsyringe';
-import { ISendStudentGrade } from './domain/send-student-grade';
-import { IProducerRabbitMQ } from '../rabbit-mq/domain/producer-rabbit-mq';
 
 @injectable()
 class SendStudentGrade implements ISendStudentGrade {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addStudentInRoomController, addSubjectInRoomController, createRoomController, createStudentController, createSubjectController, createVideoController, listRoomController } from "./controllers";
+import { addStudentInRoomController, addSubjectInRoomController, createRoomController, createStudentController, createSubjectController, createVideoController, listRoomController, studentPresenceController } from "./controllers";
 
 const routes = Router();
 
@@ -29,6 +29,10 @@ routes.post('/student', (req, res ) => {
 
 routes.post('/addstudentinroom', (req, res ) => {
     return addStudentInRoomController.handle(req,res);
+});
+
+routes.post('/addstudentpresence', (req, res ) => {
+    return studentPresenceController.handle(req,res);
 });
 
 export default routes;

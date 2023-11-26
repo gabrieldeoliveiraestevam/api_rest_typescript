@@ -2,6 +2,7 @@ import { AddStudentInRoomController } from "@controllers/room/add-student-in-roo
 import { AddSubjectInRoomController } from "@controllers/room/add-subject-in-room-controller";
 import { CreateRoomController } from "@controllers/room/create-room-controller";
 import { CreateStudentController } from "@controllers/student/create-student-controller";
+import { StudentPresenceController } from "@controllers/student/student-presence-controller";
 import { CreateSubjectController } from "@controllers/subject/create-subject-controller";
 import { CreateVideoController } from "@controllers/video/create-video-controller";
 import { RoomRepositoryTypeOrm } from "@repositories/room-repository";
@@ -10,19 +11,22 @@ import { SubjectRepositoryTypeOrm } from "@repositories/subject-repository";
 import { VideoRepositoryTypeOrm } from "@repositories/video-repository";
 import { AMQPService } from "@services/rabbit-mq/amqp-service";
 import { ProducerRabbitMQ } from "@services/rabbit-mq/producer-rabbit-mq";
-import { ISendStudentGrade } from "@services/send-student-grade/domain/send-student-grade";
 import { SendStudentGrade } from "@services/send-student-grade/send-student-grade";
-import { ISendEmail } from "@services/sendEmail/domain/send-email";
 import { SendEmail } from "@services/sendEmail/send-email";
+import { StudentPresenceService } from "@services/student-presence/student-presence";
 import { IRoomRepository } from "@usecases/port/repositories/room-repository";
 import { IStudentRepository } from "@usecases/port/repositories/student-repository";
 import { ISubjectRepository } from "@usecases/port/repositories/subject-repository";
 import { IVideoRepository } from "@usecases/port/repositories/video-repository";
+import { ISendEmail } from "@usecases/port/service/send-email";
+import { ISendStudentGrade } from "@usecases/port/service/send-student-grade";
+import { IStudentPresenceService } from "@usecases/port/service/student-presence-service";
 import { AddStudentInRoomUseCase } from "@usecases/room/add-student-in-room-use-case";
 import { AddSubjectInRoomUseCase } from "@usecases/room/add-subject-in-room-use-case";
 import { CreateRoomUseCase } from "@usecases/room/create-room-use-case";
 import { ListRoomUseCase } from "@usecases/room/list-room-use-case";
 import { CreateStudentUseCase } from "@usecases/student/create-student-use-case";
+import { StudentPresenceUseCase } from "@usecases/student/student-presence-use-case";
 import { CreateSubjectUseCase } from "@usecases/subject/create-subject-use-case";
 import { CreateVideoUseCase } from "@usecases/video/create-video-use-case";
 import { container, Lifecycle } from "tsyringe";
@@ -41,6 +45,7 @@ container.register("CreateSubjectUseCase", CreateSubjectUseCase);
 container.register("AddStudentInRoomUseCase", AddStudentInRoomUseCase);
 container.register("AddSubjectInRoomUseCase", AddSubjectInRoomUseCase);
 container.register("ListRoomUseCase", ListRoomUseCase);
+container.register("StudentPresenceUseCase", StudentPresenceUseCase);
 
 // Controller
 container.register("CreateRoomController", CreateRoomController);
@@ -49,10 +54,12 @@ container.register("CreateSubjectController", CreateSubjectController);
 container.register("CreateVideoController", CreateVideoController);
 container.register("AddStudentInRoomController", AddStudentInRoomController);
 container.register("AddSubjectInRoomController", AddSubjectInRoomController);
+container.register("StudentPresenceController", StudentPresenceController);
 
 // Service
 container.register<ISendEmail>("SendEmail", SendEmail, { lifecycle: Lifecycle.Singleton });
 container.register<ISendStudentGrade>("SendStudentGrade", SendStudentGrade, { lifecycle: Lifecycle.Singleton });
+container.register<IStudentPresenceService>("StudentPresenceService", StudentPresenceService, { lifecycle: Lifecycle.Singleton });
 
 // AMQP Service
 container.register("AMQPService", AMQPService, { lifecycle: Lifecycle.Singleton });

@@ -45,6 +45,11 @@ class AMQPService {
             'direct',
             this.assertExchangeOptions,
         );
+        channel.assertExchange(
+            'exchange-student-presence-create',
+            'direct',
+            this.assertExchangeOptions,
+        )
         console.log('Configuração de exchange e filas finalizada');
     }
 

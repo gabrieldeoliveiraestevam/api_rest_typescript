@@ -1,6 +1,6 @@
-import { ISendEmail } from "@services/sendEmail/domain/send-email";
-import { ISendStudentGrade } from "@services/send-student-grade/domain/send-student-grade";
 import { IStudentRepository } from "@usecases/port/repositories/student-repository";
+import { ISendEmail } from "@usecases/port/service/send-email";
+import { ISendStudentGrade } from "@usecases/port/service/send-student-grade";
 import { inject, injectable } from "tsyringe";
 import { ICreateStudentRequest } from "./domain/create-student-request";
 import { ICreateStudentResponse } from "./domain/create-student-response";
