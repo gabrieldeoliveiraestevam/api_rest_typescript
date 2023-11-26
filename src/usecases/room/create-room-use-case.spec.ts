@@ -36,7 +36,7 @@ describe('CreateRoomUseCase', () => {
 
     test('Should throw an error when an error occurs in create', async () => {
         mockRoomRepositoryTypeOrm.create.mockImplementation( () => {
-            throw new Error('any');
+            throw new Error('any error');
         })
         
         const sut = new CreateRoomUseCase(mockRoomRepositoryTypeOrm);

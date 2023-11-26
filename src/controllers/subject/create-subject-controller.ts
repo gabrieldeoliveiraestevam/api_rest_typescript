@@ -18,7 +18,7 @@ export class CreateSubjectController {
         });
 
         if (result.isSucces()){
-            return response.status(200).json(result);
+            return response.status(200).json(result.value);
         } else {
             return response.status(500).json({message: result.value.message});
         }
