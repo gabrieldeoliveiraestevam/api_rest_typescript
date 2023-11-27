@@ -32,3 +32,5 @@ class UserRepositoryTypeOrm {
 }
 
 export { UserRepositoryTypeOrm };
+
+export const userRepositoryTypeOrm = AppDataSource.getRepository(User);
