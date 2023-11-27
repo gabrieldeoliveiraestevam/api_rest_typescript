@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addStudentInRoomController, addSubjectInRoomController, createRoomController, createStudentController, createSubjectController, createUserController, createVideoController, listRoomController, studentPresenceController } from "./controllers";
+import { addStudentInRoomController, addSubjectInRoomController, createRoomController, createStudentController, createSubjectController, createUserController, createVideoController, listRoomController, loginUserController, studentPresenceController } from "./controllers";
 
 const routes = Router();
 
@@ -37,6 +37,10 @@ routes.post('/addstudentpresence', (req, res ) => {
 
 routes.post('/createuser', (req, res) => {
     return createUserController.handle(req,res);
+})
+
+routes.post('/loginuser', (req, res) => {
+    return loginUserController.handle(req,res);
 })
 
 export default routes;

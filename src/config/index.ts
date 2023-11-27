@@ -23,4 +23,7 @@ export const Config = {
   RABBITMQ: {
     URI: process.env.URI_RABBITMQ ?? 'amqp://guest:guest@localhost:5672',
   },
+  JWT: {
+    PASSWORD: process.env.JWT_PASSWORD ?? "",
+  }
 };

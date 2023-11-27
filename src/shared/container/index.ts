@@ -5,6 +5,7 @@ import { CreateStudentController } from "@controllers/student/create-student-con
 import { StudentPresenceController } from "@controllers/student/student-presence-controller";
 import { CreateSubjectController } from "@controllers/subject/create-subject-controller";
 import { CreateUserController } from "@controllers/user/create-user-controller";
+import { LoginUserController } from "@controllers/user/login-user-controller";
 import { CreateVideoController } from "@controllers/video/create-video-controller";
 import { RoomRepositoryTypeOrm } from "@repositories/room-repository";
 import { StudentRepositoryTypeOrm } from "@repositories/student-repository";
@@ -30,6 +31,7 @@ import { CreateStudentUseCase } from "@usecases/student/create-student-use-case"
 import { StudentPresenceUseCase } from "@usecases/student/student-presence-use-case";
 import { CreateSubjectUseCase } from "@usecases/subject/create-subject-use-case";
 import { CreateUserUseCase } from "@usecases/user/create-user-use-case";
+import { LoginUserUseCase } from "@usecases/user/login-user-use-case";
 import { CreateVideoUseCase } from "@usecases/video/create-video-use-case";
 import { container, Lifecycle } from "tsyringe";
 
@@ -50,6 +52,7 @@ container.register("AddSubjectInRoomUseCase", AddSubjectInRoomUseCase);
 container.register("ListRoomUseCase", ListRoomUseCase);
 container.register("StudentPresenceUseCase", StudentPresenceUseCase);
 container.register("CreateUserUseCase", CreateUserUseCase);
+container.register("LoginUserUseCase", LoginUserUseCase);
 
 // Controller
 container.register("CreateRoomController", CreateRoomController);
@@ -60,6 +63,7 @@ container.register("AddStudentInRoomController", AddStudentInRoomController);
 container.register("AddSubjectInRoomController", AddSubjectInRoomController);
 container.register("StudentPresenceController", StudentPresenceController);
 container.register("CreateUserController", CreateUserController);
+container.register("LoginUserController", LoginUserController);
 
 // Service
 container.register<ISendEmail>("SendEmail", SendEmail, { lifecycle: Lifecycle.Singleton });

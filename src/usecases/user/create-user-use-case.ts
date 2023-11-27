@@ -28,9 +28,9 @@ export class CreateUserUseCase {
                     name: newUser.name,
                     email: newUser.email
                 });
-            } else {
-                return failure(new EmailAlreadyRegistered());
-            }   
+            } 
+            
+            return failure(new EmailAlreadyRegistered());   
         } catch (error) {
             console.log(error);
             return failure(new Error('Error CreateSubjectUseCase'));

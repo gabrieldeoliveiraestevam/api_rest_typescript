@@ -9,6 +9,7 @@ import { CreateVideoController } from "./video/create-video-controller";
 import '@shared/container';
 import { StudentPresenceController } from "./student/student-presence-controller";
 import { CreateUserController } from "./user/create-user-controller";
+import { LoginUserController } from "./user/login-user-controller";
 
 // Controllers
 const createSubjectController = container.resolve(CreateSubjectController);
@@ -29,6 +30,8 @@ const studentPresenceController = container.resolve(StudentPresenceController);
 
 const createUserController = container.resolve(CreateUserController);
 
+const loginUserController = container.resolve(LoginUserController);
+
 export { 
     createSubjectController , 
     createRoomController , 
@@ -38,5 +41,6 @@ export {
     createStudentController , 
     addStudentInRoomController ,
     studentPresenceController , 
-    createUserController
+    createUserController , 
+    loginUserController
 }

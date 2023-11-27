@@ -34,7 +34,7 @@ describe('CreateSubjectUseCase', () => {
     
     });
 
-    test('Should throw an error when an error occurs in create - 1', async () => {
+    test('Should throw an error when an error occurs in create', async () => {
         mockSubjectRepositoryTypeOrm.create.mockImplementation( () => {
             throw new Error('any');
         })
