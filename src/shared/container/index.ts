@@ -1,6 +1,7 @@
 import { AddStudentInRoomController } from "@controllers/room/add-student-in-room-controller";
 import { AddSubjectInRoomController } from "@controllers/room/add-subject-in-room-controller";
 import { CreateRoomController } from "@controllers/room/create-room-controller";
+import { ListRoomController } from "@controllers/room/list-room-controller";
 import { CreateStudentController } from "@controllers/student/create-student-controller";
 import { StudentPresenceController } from "@controllers/student/student-presence-controller";
 import { CreateSubjectController } from "@controllers/subject/create-subject-controller";
@@ -64,6 +65,7 @@ container.register("AddSubjectInRoomController", AddSubjectInRoomController);
 container.register("StudentPresenceController", StudentPresenceController);
 container.register("CreateUserController", CreateUserController);
 container.register("LoginUserController", LoginUserController);
+container.register("ListRoomController", ListRoomController);
 
 // Service
 container.register<ISendEmail>("SendEmail", SendEmail, { lifecycle: Lifecycle.Singleton });
